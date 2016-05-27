@@ -41,6 +41,7 @@ namespace SearchTool
             foreach (var file in files)
             {
                 TreeNode node = _searchResultTreeView.Nodes.Add(file);
+                _searchResultTreeView.SelectedNode = node;
                 _fileResultCount++;
             }
 
@@ -50,8 +51,22 @@ namespace SearchTool
 
         private void onDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            string fileName = e.Node.Text;
-            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", fileName));
+            OpenFileInExplorer(e.Node.Text);
+        }
+
+        private void onOpenFileLocation(object sender, EventArgs e)
+        {
+            OpenFileInExplorer(_searchResultTreeView.SelectedNode.Text);
+        }
+
+        private void OpenFileInExplorer(string filename)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", filename));
+        }
+
+        private void onRightClickNode(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            _searchResultTreeView.SelectedNode = e.Node;
         }
     }
 }

@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this._searchResultTreeView = new System.Windows.Forms.TreeView();
+            this._fileContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this._fileContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -50,12 +54,29 @@
             // 
             // _searchResultTreeView
             // 
+            this._searchResultTreeView.ContextMenuStrip = this._fileContextMenu;
             this._searchResultTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._searchResultTreeView.FullRowSelect = true;
             this._searchResultTreeView.Location = new System.Drawing.Point(0, 0);
             this._searchResultTreeView.Name = "_searchResultTreeView";
             this._searchResultTreeView.Size = new System.Drawing.Size(579, 316);
             this._searchResultTreeView.TabIndex = 0;
+            this._searchResultTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.onRightClickNode);
             this._searchResultTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.onDoubleClick);
+            // 
+            // _fileContextMenu
+            // 
+            this._fileContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFileLocationToolStripMenuItem});
+            this._fileContextMenu.Name = "_fileContextMenu";
+            this._fileContextMenu.Size = new System.Drawing.Size(174, 26);
+            // 
+            // openFileLocationToolStripMenuItem
+            // 
+            this.openFileLocationToolStripMenuItem.Name = "openFileLocationToolStripMenuItem";
+            this.openFileLocationToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.openFileLocationToolStripMenuItem.Text = "Open File Location";
+            this.openFileLocationToolStripMenuItem.Click += new System.EventHandler(this.onOpenFileLocation);
             // 
             // SearchResultForm
             // 
@@ -68,6 +89,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this._fileContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -76,5 +98,7 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView _searchResultTreeView;
+        private System.Windows.Forms.ContextMenuStrip _fileContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem openFileLocationToolStripMenuItem;
     }
 }
