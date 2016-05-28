@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this._searchTextBox = new System.Windows.Forms.RichTextBox();
@@ -38,10 +39,15 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this._PictureBox = new System.Windows.Forms.PictureBox();
             this._timerLabel = new System.Windows.Forms.Label();
+            this._notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this._trayIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._PictureBox)).BeginInit();
+            this._trayIconContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -157,6 +163,39 @@
             this._timerLabel.TabIndex = 1;
             this._timerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // _notifyIcon
+            // 
+            this._notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this._notifyIcon.BalloonTipText = "SearchTool is Running";
+            this._notifyIcon.BalloonTipTitle = "SearchTool";
+            this._notifyIcon.ContextMenuStrip = this._trayIconContextMenuStrip;
+            this._notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("_notifyIcon.Icon")));
+            this._notifyIcon.Text = "SearchTool";
+            this._notifyIcon.Visible = true;
+            this._notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.onDblClick);
+            // 
+            // _trayIconContextMenuStrip
+            // 
+            this._trayIconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this._trayIconContextMenuStrip.Name = "_trayIconContextMenuStrip";
+            this._trayIconContextMenuStrip.Size = new System.Drawing.Size(104, 48);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.onTrayIconOpenApp);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.onTrayIconExitApp);
+            // 
             // SearchForm
             // 
             this.AcceptButton = this._enterButton;
@@ -168,12 +207,14 @@
             this.Name = "SearchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "File Search";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.onFormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._PictureBox)).EndInit();
+            this._trayIconContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -189,6 +230,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.PictureBox _PictureBox;
         private System.Windows.Forms.Label _timerLabel;
+        private System.Windows.Forms.NotifyIcon _notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip _trayIconContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     }
 }
 

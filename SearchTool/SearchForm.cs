@@ -189,6 +189,44 @@ namespace SearchTool
             _searchProgressBar.Minimum = 1;
             _timerLabel.Text = "";
         }
+
+        private void onDblClick(object sender, MouseEventArgs e)
+        {
+            onTrayIconOpenApp(sender, e);
+        }
+
+        private void onFormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                e.Cancel = false;
+
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.ShowInTaskbar = false;
+                this.Visible = false;
+                _notifyIcon.ShowBalloonTip(800, "Search Tool", "Search Tool is Still Running Here", ToolTipIcon.Info);
+            }
+        }
+
+        private void onTrayIconExitApp(object sender, EventArgs e)
+        {
+            this.Close();
+            _notifyIcon.Visible = false;
+        }
+
+        private void onTrayIconOpenApp(object sender, EventArgs e)
+        {
+            if (this.Visible == false)
+            {
+                this.Visible = true;
+                this.ShowInTaskbar = true;
+            }
+            else
+            {
+                _notifyIcon.ShowBalloonTip(8000, "Search Tool", "SearchTool is already Running", ToolTipIcon.Info);
+            }
+        }
     }
 
 }
